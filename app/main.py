@@ -2,9 +2,9 @@ import math
 
 
 class Vector:
-    def __init__(self, x: int, y: int) -> None:
-        self.x = round(x, 2)
-        self.y = round(y, 2)
+    def __init__(self, first_x: int, second_y: int) -> None:
+        self.x = round(first_x, 2)
+        self.y = round(second_y, 2)
 
     def __add__(self, other: None) -> None:
         if isinstance(other, Vector):
