@@ -6,25 +6,29 @@ class Vector:
         self.x = round(x, 2)
         self.y = round(y, 2)
 
-    def __add__(self, other) -> None:
+    def __add__(self, other: None) -> None:
         if isinstance(other, Vector):
             return Vector(self.x + other.x, self.y + other.y)
 
-    def __sub__(self, other):
+    def __sub__(self, other: None) -> None:
         if isinstance(other, Vector):
             return Vector(self.x - other.x, self.y - other.y)
 
-    def __mul__(self, other):
+    def __mul__(self, other: None) -> None:
         if isinstance(other, Vector):
             return self.x * other.x + self.y * other.y
         if isinstance(other, (int, float)):
             return Vector(self.x * other, self.y * other)
 
     @classmethod
-    def create_vector_by_two_points(cls, start_point: tuple, end_point: tuple) -> None:
-        x = end_point[0] - start_point[0]
-        y = end_point[1] - start_point[1]
-        return cls(x, y)
+    def create_vector_by_two_points(
+            cls
+            , start_point: tuple
+            , end_point: tuple
+    ) -> None:
+        first = end_point[0] - start_point[0]
+        second = end_point[1] - start_point[1]
+        return cls(first, second)
 
     def get_length(self) -> None:
         return (self.x ** 2 + self.y ** 2) ** 0.5
@@ -33,7 +37,7 @@ class Vector:
         lenght = self.get_length()
         return Vector(round(self.x / lenght, 2), round(self.y / lenght, 2))
 
-    def angle_between(self, other) -> None:
+    def angle_between(self, other: None) -> None:
         """Обчислює кут між поточним вектором і іншим вектором у градусах."""
         # Скалярний добуток
         dot = self.__mul__(other)
@@ -51,12 +55,12 @@ class Vector:
         return round(math.degrees(angle_radians))
 
     # Повертає кут між поточним вектором і позитивною віссю Y.
-    def get_angle(self):
+    def get_angle(self) -> None:
         """Обчислює кут між вектором і позитивною віссю Y."""
         magnitude_self = self.get_length()
         # Косинус кута
         cos_angle = self.y / magnitude_self
-        # Обмеження косинуса в діапазоні [-1, 1] (щоб уникнути похибок обчислення)
+        # Обмеження косинуса в діапазоні [-1, 1]
         cos_angle = max(-1, min(1, cos_angle))
         # Кут у радіанах
         angle_radians = math.acos(cos_angle)
@@ -64,7 +68,7 @@ class Vector:
         angle_degrees = math.degrees(angle_radians)
         return round(angle_degrees)
 
-    def rotate(self, angle: int):
+    def rotate(self, angle: int) -> None:
         angle_radians = math.radians(angle)
         cos_angle = math.cos(angle_radians)
         sin_angle = math.sin(angle_radians)
